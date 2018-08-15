@@ -17,8 +17,8 @@ somaPares (x:xs)
 
 -- soma dos elementos nas posições pares da lista
 somaPosPares [] = 0
-somaPosPares [x] = x
-somaPosPares (x:xs) = x + somaPosPares (tail xs)
+somaPosPares [x] = 0
+somaPosPares (x:xs) = head xs + somaPosPares (tail xs)
 
 -- existe item na lista (True ou False)
 existe e [] = False
