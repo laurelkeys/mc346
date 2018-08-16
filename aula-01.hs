@@ -49,16 +49,16 @@ reverte (x:xs) = reverte xs ++ [x]
 -- intercala 2 listas
 -- intercala1 [1,2,3] [4,5,6,7,8]
 -- ==> [1,4,2,5,3,6]
-intercala11 x [] = []
-intercala11 [] y = []
-intercala11 (x:xs) (y:ys) = x : y : (intercala11 xs ys)
+intercala1 x [] = []
+intercala1 [] y = []
+intercala1 (x:xs) (y:ys) = x : y : (intercala1 xs ys)
 
 -- intercala 2 listas
 -- intercala2 [1,2,3] [4,5,6,7,8]
 -- ==>  [1,4,2,5,3,6,7,8]
-intercala22 x [] = x
-intercala22 [] y = y
-intercala22 (x:xs) (y:ys) = x : y : (intercala22 xs ys)
+intercala2 x [] = x
+intercala2 [] y = y
+intercala2 (x:xs) (y:ys) = x : y : (intercala2 xs ys)
 
 -- a lista ja esta ordenada?
 ordenada [] = True
