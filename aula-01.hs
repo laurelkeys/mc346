@@ -12,7 +12,7 @@ somaPares (x:xs)
   | mod x 2 == 0 = x + somaPares xs
   | otherwise = somaPares xs
 
--- soma dos elementos nas posições pares da lista
+-- soma dos elementos nas posições pares da lista (o primeiro elemento esta na posicao 1)
 somaPosPares [] = 0
 somaPosPares [x] = 0
 somaPosPares (x:xs) = head xs + somaPosPares (tail xs)
@@ -27,7 +27,7 @@ existe e (x:xs)
 posicao e [] = 0
 posicao e (x:xs)
   | x == e = 1
-  | existe e xs = 1 + posicao e xs
+  | posicao e xs /= 0 = 1 + posicao e xs
   | otherwise = 0
 
 -- conta quantas vezes o item aparece na lista (0 se nenhuma)
@@ -49,18 +49,16 @@ reverte (x:xs) = reverte xs ++ [x]
 -- intercala 2 listas
 -- intercala1 [1,2,3] [4,5,6,7,8]
 -- ==> [1,4,2,5,3,6]
-intercala1 l1 l2
-  | l1 == [] = []
-  | l2 == [] = []
-  | otherwise = (head l1) : (head l2) : (intercala1 (tail l1) (tail l2))
+intercala11 x [] = []
+intercala11 [] y = []
+intercala11 (x:xs) (y:ys) = x : y : (intercala11 xs ys)
 
 -- intercala 2 listas
 -- intercala2 [1,2,3] [4,5,6,7,8]
 -- ==>  [1,4,2,5,3,6,7,8]
-intercala2 l1 l2
-  | l1 == [] = l2
-  | l2 == [] = l1
-  | otherwise = (head l1) : (head l2) : (intercala2 (tail l1) (tail l2))
+intercala22 x [] = x
+intercala22 [] y = y
+intercala22 (x:xs) (y:ys) = x : y : (intercala22 xs ys)
 
 -- a lista ja esta ordenada?
 ordenada [] = True
@@ -75,11 +73,26 @@ gera n
   | n == 1 = [1]
   | otherwise = gera (n-1) ++ [n]
 
+-- retorna o ultimo elemento de uma lista
+ultimo [x] = x
+ultimo (x:xs) = ultimo xs
+
+-- retorna a lista sem o utlimo elemento
+comeco [x] = []
+comeco (x:xs) = x : comeco xs
+
 -- shift right
 -- shiftr [1,2,3,4]
 -- ==> [4,1,2,3]
 shiftr [] = []
-shiftr l = head (reverte l) : reverte (tail (reverte l))
+shiftr [x] = [x]
+shiftr (x:xs) = head (shiftr xs) : x : tail (shiftr xs)
+
+-- shiftr n lista (shift right n vezes)
+shiftrN [] n = []
+shiftrN [x] n = [x]
+shiftrN (x:xs) 0 = (x:xs)
+shiftrN (x:xs) n = shiftrN (head (shiftrN xs 1) : x : tail (shiftrN xs 1)) (n-1)
 
 -- shift left
 -- shiftl [1,2,3,4]
@@ -87,37 +100,49 @@ shiftr l = head (reverte l) : reverte (tail (reverte l))
 shiftl [] = []
 shiftl (x:xs) = xs ++ [x]
 
+-- shift left n vezes
+shiftlN [] n = []
+shiftlN [x] n = [x]
+shiftlN (x:xs) 0 = (x:xs)
+shiftlN (x:xs) n = shiftlN (xs ++ [x]) (n-1)
+
 -- remove item da lista (1 vez so)
-remove e [] = []
-remove e (x:xs)
+removePrim e [] = []
+removePrim e (x:xs)
   | x == e = xs
-  | otherwise = x : remove e xs
+  | otherwise = x : removePrim e xs
 
 -- remove item da lista (todas as vezes)
-removeTodos e [] = []
-removeTodos e (x:xs)
-  | x == e = removeTodos e xs
-  | otherwise = x : removeTodos e xs
+remove e [] = []
+remove e (x:xs)
+  | x == e = remove e xs
+  | otherwise = x : remove e xs
 
 -- remove item da lista n (as primeiras n vezes)
-removeN e l n
-  | n <= 0 = l
-  | otherwise = removeN e (remove e l) (n-1)
+removeN e [] n = []
+removeN e (x:xs) n
+  | n <= 0 = (x:xs)
+  | x == e = removeN e xs (n-1)
+  | otherwise = x : removeN e xs n
 
 -- remove item da lista (a ultima vez que ele aparece) **
-removeUlt e l = reverte (remove e (reverte l))
+removeUlt e [] = []
+removeUlt e (x:xs)
+  | x /= e = x : removeUlt e xs
+  | otherwise = if xs == removeUlt e xs then xs
+                                        else x : removeUlt e xs
 
 -- troca velho por novo na lista (1 so vez)
-troca a b [] = []
-troca a b (x:xs)
+trocaPrim a b [] = []
+trocaPrim a b (x:xs)
   | x == a = b : xs
-  | otherwise = x : troca a b xs
+  | otherwise = x : trocaPrim a b xs
 
 -- troca velho por novo na lista (todas vezes)
-trocaTodos a b [] = []
-trocaTodos a b (x:xs)
-  | x == a = b : trocaTodos a b xs
-  | otherwise = x : trocaTodos a b xs
+troca a b [] = []
+troca a b (x:xs)
+  | x == a = b : troca a b xs
+  | otherwise = x : troca a b xs
 
 -- troca velho por novo na lista n (as primeiras n vezes)
 trocaN a b [] n = []
