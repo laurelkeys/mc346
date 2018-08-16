@@ -149,4 +149,4 @@ trocaN a b [] n = []
 trocaN a b (x:xs) n
   | n <= 0 = (x:xs)
   | x == a = b : trocaN a b xs (n-1)
-  | otherwise = x : trocaN a b xs (n-1)
+  | otherwise = x : trocaN a b xs n
