@@ -3,8 +3,9 @@ tamanho [] = 0
 tamanho (_:xs) = 1 + tamanho xs
 
 -- soma dos elementos de uma lista
-soma [] = 0
-soma (x:xs) = x + soma xs
+soma x = soma' x 0
+  where soma' [] acc = acc
+        soma' (x:xs) acc = soma' xs (x+acc)
 
 -- soma dos números pares de uma lista
 somaPares [] = 0
@@ -44,8 +45,9 @@ maior (x:xs)
   where y = maior xs
 
 -- reverte uma lista - FAZER p/ próxima aula - recursão com acumulados
-reverte [] = []
-reverte (x:xs) = reverte xs ++ [x]
+reverte x = reverte' x []
+  where reverte' [] acc = acc
+        reverte' (x:xs) acc = reverte' xs (x:acc)
 
 -- intercala 2 listas
 -- intercala1 [1,2,3] [4,5,6,7,8]
