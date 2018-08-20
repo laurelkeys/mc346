@@ -164,3 +164,20 @@ trocaUlt a b x = trocaUlt' a b x
           | x /= a || trocou = (x:xs', trocou)
           | otherwise = (b:xs', True)
           where (xs', trocou) = trocaUlt' a b xs
+
+-- posicoes - dado um item e uma lista, retorna uma lista com todas as posicoes (primeiro elemento esta na posicao 1) do item na lista
+
+
+-- split - dado um item e uma lista retorna uma lista de listas, todos os elementos da lista antes do item (a primeira vez que ele aparece) e todos depois
+-- split "qwertyuiopoiuyt" 't' ==> ["qwer", "yuiopoiuyt"]
+
+
+-- splitall - mesma coisa que o split mas retorna todas as sublistas
+-- splitall "qwertyuiopoiuytxxt" 't' ==> ["qwer", "yuiopoiuy", "xx", ""]  ou  ["qwer", "yuiopoiuy", "xx"]
+
+
+-- drop n lista - a lista sem os n primeiros elementos
+
+
+-- take n lista - os primeiros n elementos da lista
+
