@@ -1,6 +1,6 @@
 -- tamanho de uma lista
 tamanho [] = 0
-tamanho (x:xs) = 1 + tamanho xs
+tamanho (_:xs) = 1 + tamanho xs
 
 -- soma dos elementos de uma lista
 soma [] = 0
@@ -14,24 +14,24 @@ somaPares (x:xs)
 
 -- soma dos elementos nas posições pares da lista (o primeiro elemento esta na posicao 1)
 somaPosPares [] = 0
-somaPosPares [x] = 0
-somaPosPares (x:xs) = head xs + somaPosPares (tail xs)
+somaPosPares [_] = 0
+somaPosPares (_:xs) = head xs + somaPosPares (tail xs)
 
 -- existe item na lista (True ou False)
-existe e [] = False
+existe _ [] = False
 existe e (x:xs)
   | x == e = True
   | otherwise = existe e xs
 
 -- posição do item na lista (0 se nao esta la, 1 se é o primeiro)
-posicao e [] = 0
+posicao _ [] = 0
 posicao e (x:xs)
   | x == e = 1
   | posicao e xs /= 0 = 1 + posicao e xs
   | otherwise = 0
 
 -- conta quantas vezes o item aparece na lista (0 se nenhuma)
-conta e [] = 0
+conta _ [] = 0
 conta e (x:xs)
   | x == e = 1 + conta e xs
   | otherwise = conta e xs
@@ -39,8 +39,9 @@ conta e (x:xs)
 -- maior elemento de uma lista - FAZER p/ proxima aula - variáveis locais
 maior [x] = x
 maior (x:xs)
-  | x >= maior xs = x
-  | otherwise = maior xs
+  | x >= y = x
+  | otherwise = y
+  where y = maior xs
 
 -- reverte uma lista - FAZER p/ próxima aula - recursão com acumulados
 reverte [] = []
@@ -49,8 +50,8 @@ reverte (x:xs) = reverte xs ++ [x]
 -- intercala 2 listas
 -- intercala1 [1,2,3] [4,5,6,7,8]
 -- ==> [1,4,2,5,3,6]
-intercala1 x [] = []
-intercala1 [] y = []
+intercala1 _ [] = []
+intercala1 [] _ = []
 intercala1 (x:xs) (y:ys) = x : y : (intercala1 xs ys)
 
 -- intercala 2 listas
@@ -62,7 +63,7 @@ intercala2 (x:xs) (y:ys) = x : y : (intercala2 xs ys)
 
 -- a lista ja esta ordenada?
 ordenada [] = True
-ordenada [x] = True
+ordenada [_] = True
 ordenada (x:xs)
   | x <= head xs = ordenada xs
   | otherwise = False
@@ -75,10 +76,10 @@ gera n
 
 -- retorna o ultimo elemento de uma lista
 ultimo [x] = x
-ultimo (x:xs) = ultimo xs
+ultimo (_:xs) = ultimo xs
 
 -- retorna a lista sem o utlimo elemento
-comeco [x] = []
+comeco [_] = []
 comeco (x:xs) = x : comeco xs
 
 -- shift right
@@ -86,13 +87,15 @@ comeco (x:xs) = x : comeco xs
 -- ==> [4,1,2,3]
 shiftr [] = []
 shiftr [x] = [x]
-shiftr (x:xs) = head (shiftr xs) : x : tail (shiftr xs)
+shiftr (x:xs) = let xs' = shiftr xs in 
+                head xs' : x : tail xs'
 
 -- shiftr n lista (shift right n vezes)
-shiftrN [] n = []
-shiftrN [x] n = [x]
+shiftrN [] _ = []
+shiftrN [x] _ = [x]
 shiftrN (x:xs) 0 = (x:xs)
-shiftrN (x:xs) n = shiftrN (head (shiftrN xs 1) : x : tail (shiftrN xs 1)) (n-1)
+shiftrN (x:xs) n = let xs' = shiftrN xs 1 in 
+                   shiftrN (head xs' : x : tail xs') (n-1)
 
 -- shift left
 -- shiftl [1,2,3,4]
@@ -101,51 +104,52 @@ shiftl [] = []
 shiftl (x:xs) = xs ++ [x]
 
 -- shift left n vezes
-shiftlN [] n = []
-shiftlN [x] n = [x]
+shiftlN [] _ = []
+shiftlN [x] _ = [x]
 shiftlN (x:xs) 0 = (x:xs)
 shiftlN (x:xs) n = shiftlN (xs ++ [x]) (n-1)
 
 -- remove item da lista (1 vez so)
-removePrim e [] = []
+removePrim _ [] = []
 removePrim e (x:xs)
   | x == e = xs
   | otherwise = x : removePrim e xs
 
 -- remove item da lista (todas as vezes)
-remove e [] = []
+remove _ [] = []
 remove e (x:xs)
   | x == e = remove e xs
   | otherwise = x : remove e xs
 
 -- remove item da lista n (as primeiras n vezes)
-removeN e [] n = []
+removeN _ [] _ = []
 removeN e (x:xs) n
   | n <= 0 = (x:xs)
   | x == e = removeN e xs (n-1)
   | otherwise = x : removeN e xs n
 
 -- remove item da lista (a ultima vez que ele aparece) **
-removeUlt e [] = []
+removeUlt _ [] = []
 removeUlt e (x:xs)
-  | x /= e = x : removeUlt e xs
-  | otherwise = if xs == removeUlt e xs then xs
-                                        else x : removeUlt e xs
+  | x /= e = x : xs'
+  | xs /= xs' = x : xs'
+  | otherwise = xs
+  where xs' = removeUlt e xs
 
 -- troca velho por novo na lista (1 so vez)
-trocaPrim a b [] = []
+trocaPrim _ _ [] = []
 trocaPrim a b (x:xs)
   | x == a = b : xs
   | otherwise = x : trocaPrim a b xs
 
 -- troca velho por novo na lista (todas vezes)
-troca a b [] = []
+troca _ _ [] = []
 troca a b (x:xs)
   | x == a = b : troca a b xs
   | otherwise = x : troca a b xs
 
 -- troca velho por novo na lista n (as primeiras n vezes)
-trocaN a b [] n = []
+trocaN _ _ [] _ = []
 trocaN a b (x:xs) n
   | n <= 0 = (x:xs)
   | x == a = b : trocaN a b xs (n-1)
