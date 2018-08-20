@@ -156,3 +156,11 @@ trocaN a b (x:xs) n
   | n <= 0 = (x:xs)
   | x == a = b : trocaN a b xs (n-1)
   | otherwise = x : trocaN a b xs n
+
+-- troca velho por novo na lista (a ultima vez que ele aparece)
+trocaUlt a b x = trocaUlt' a b x
+  where trocaUlt' _ _ [] = ([], False)
+        trocaUlt' a b (x:xs)
+          | x /= a || trocou = (x:xs', trocou)
+          | otherwise = (b:xs', True)
+          where (xs', trocou) = trocaUlt' a b xs
