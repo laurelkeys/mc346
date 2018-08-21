@@ -158,12 +158,13 @@ trocaN a b (x:xs) n
   | otherwise = x : trocaN a b xs n
 
 -- troca velho por novo na lista (a ultima vez que ele aparece)
-trocaUlt a b x = trocaUlt' a b x
+trocaUlt a b x = first (trocaUlt' a b x)
   where trocaUlt' _ _ [] = ([], False)
         trocaUlt' a b (x:xs)
           | x /= a || trocou = (x:xs', trocou)
           | otherwise = (b:xs', True)
           where (xs', trocou) = trocaUlt' a b xs
+        first (x, _) = x
 
 -- posicoes - dado um item e uma lista, retorna uma lista com todas as posicoes (primeiro elemento esta na posicao 1) do item na lista
 
