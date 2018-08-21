@@ -183,11 +183,21 @@ split e x = split' e x []
           | otherwise = split' e xs (acc ++ [x])
 
 -- splitall - mesma coisa que o split mas retorna todas as sublistas
--- splitall "qwertyuiopoiuytxxt" 't' ==> ["qwer", "yuiopoiuy", "xx", ""]  ou  ["qwer", "yuiopoiuy", "xx"]
-
+-- splitall 't' "qwertyuiopoiuytxxt" ==> ["qwer", "yuiopoiuy", "xx", ""]  ou  ["qwer", "yuiopoiuy", "xx"]
+splitall e x = splitall' e x []
+  where splitall' _ [] acc = [acc]
+        splitall' e (x:xs) acc
+          | x == e = acc : (splitall' e xs [])
+          | otherwise = splitall' e xs (acc ++ [x])
 
 -- drop n lista - a lista sem os n primeiros elementos
-
+drop _ [] = []
+drop n (x:xs)
+  | n <= 0 = (x:xs)
+  | otherwise = Main.drop (n-1) xs
 
 -- take n lista - os primeiros n elementos da lista
-
+take _ [] = []
+take n (x:xs)
+  | n <= 0 = []
+  | otherwise = x : Main.take (n-1) xs
