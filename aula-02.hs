@@ -194,10 +194,10 @@ splitall e x = splitall' e x []
 drop _ [] = []
 drop n (x:xs)
   | n <= 0 = (x:xs)
-  | otherwise = Main.drop (n-1) xs
+  | otherwise = drop (n-1) xs
 
 -- take n lista - os primeiros n elementos da lista
 take _ [] = []
 take n (x:xs)
   | n <= 0 = []
-  | otherwise = x : Main.take (n-1) xs
+  | otherwise = x : take (n-1) xs
