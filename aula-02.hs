@@ -28,8 +28,9 @@ existe e (x:xs)
 posicao _ [] = 0
 posicao e (x:xs)
   | x == e = 1
-  | posicao e xs /= 0 = 1 + posicao e xs
+  | pos /= 0 = 1 + pos
   | otherwise = 0
+  where pos = posicao e xs
 
 -- conta quantas vezes o item aparece na lista (0 se nenhuma)
 conta _ [] = 0
@@ -167,11 +168,19 @@ trocaUlt a b x = first (trocaUlt' a b x)
         first (x, _) = x
 
 -- posicoes - dado um item e uma lista, retorna uma lista com todas as posicoes (primeiro elemento esta na posicao 1) do item na lista
-
+posicoes e x = posicoes' e x 1
+  where posicoes' _ [] _ = []
+        posicoes' e (x:xs) pos
+          | x == e = pos : posicoes' e xs (pos+1)
+          | otherwise = posicoes' e xs (pos+1)
 
 -- split - dado um item e uma lista retorna uma lista de listas, todos os elementos da lista antes do item (a primeira vez que ele aparece) e todos depois
--- split "qwertyuiopoiuyt" 't' ==> ["qwer", "yuiopoiuyt"]
-
+-- split 't' "qwertyuiopoiuyt" ==> ["qwer", "yuiopoiuyt"]
+split e x = split' e x []
+  where split' _ [] acc = [acc, []]
+        split' e (x:xs) acc
+          | x == e = [acc, xs]
+          | otherwise = split' e xs (acc ++ [x])
 
 -- splitall - mesma coisa que o split mas retorna todas as sublistas
 -- splitall "qwertyuiopoiuytxxt" 't' ==> ["qwer", "yuiopoiuy", "xx", ""]  ou  ["qwer", "yuiopoiuy", "xx"]
