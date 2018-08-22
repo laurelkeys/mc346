@@ -20,3 +20,9 @@ remove e xs = [x | x <- xs, x /= e]
 
 -- troca velho por novo na lista (todas vezes)
 troca a b xs = [if x == a then b else x | x <- xs]
+
+-- quicksort
+qs [] = []
+qs (x:xs) = menor ++ [x]  ++ maior
+  where  menor = qs [y | y <- xs, y <= x]
+         maior = qs [y | y <- xs, y > x]
