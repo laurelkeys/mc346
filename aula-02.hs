@@ -177,7 +177,7 @@ posicoes e x = posicoes' e x 1
 -- split - dado um item e uma lista retorna uma lista de listas, todos os elementos da lista antes do item (a primeira vez que ele aparece) e todos depois
 -- split 't' "qwertyuiopoiuyt" ==> ["qwer", "yuiopoiuyt"]
 split e x = split' e x []
-  where split' _ [] acc = [acc, []]
+  where split' _ [] acc = [acc]
         split' e (x:xs) acc
           | x == e = [acc, xs]
           | otherwise = split' e xs (acc ++ [x])
