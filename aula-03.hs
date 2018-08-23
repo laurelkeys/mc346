@@ -26,3 +26,12 @@ qs [] = []
 qs (x:xs) = menor ++ [x]  ++ maior
   where  menor = qs [y | y <- xs, y <= x]
          maior = qs [y | y <- xs, y > x]
+
+-- zip
+pareie [] _ = []
+pareie _ [] = []
+pareie (x:xs) (y:ys) = (x, y) : pareie xs ys
+
+-- posicoes - dado um item e uma lista, retorna uma lista com todas as posicoes (primeiro elemento esta na posicao 1) do item na lista
+posicoes e xs = let par = pareie xs [1..(tamanho xs)] in
+                [i | (x, i) <- par, x == e]
