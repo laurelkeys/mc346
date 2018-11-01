@@ -18,7 +18,7 @@ def timedIO(func):
     def wrapper(*args):
         start = time.time()
         result = func(*args)
-        wrapper.timedIO += f'hour: {time.strftime("%H")}h | args: {args} | output: {ret}\n'
+        wrapper.timedIO += f'hour: {time.strftime("%H")}h | args: {args} | output: {result}\n'
         return result
     wrapper.timedIO = ""
     return wrapper
