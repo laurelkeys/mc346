@@ -18,7 +18,7 @@ See below a summary of the interesting features/topics aborded, linked to their 
 - Find the most common vowel in a string: [#8](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-08.hs)
 - Types, `Maybe` and monads: [#9](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-09.hs)
 - Weighted mean calculation from IO input: [#10](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-10.hs)
-### Project
+### [Project](https://github.com/laurelkeys/programming-paradigms/blob/master/projeto-01.hs)
 A Google Maps/Waze-ish algorithm to calculate the shortest (quickest) path between two points mixing public transportation and walking, implementing [Dijkstra](https://youtu.be/AKiq3JxCVi4?t=10)'s [SPF algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm).
 #### Input
 **Paths** in the form `origin destination mode time` (walking is defined as `a-pe`); followed by a new line and:
@@ -58,8 +58,8 @@ Save the input to a file, for example `test-entry.in` and run:
 
 ## Prolog
 ### Topics
-- Binary search tree and dictionary: [#13](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-03.pl)
-### Project
+- Binary search tree and dictionary: [#13](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-13.pl)
+### [Project](https://github.com/laurelkeys/programming-paradigms/blob/master/projeto-02.pl)
 Search for intersections (of at least 4 characters) between endings and beginnings of strings in a list, and assembly of new strings joining the given ones on it's intersections, inspired by DNA recombination.
 #### Input
 A list of strings added to a file, e.g.:
