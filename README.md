@@ -1,10 +1,10 @@
 
 # programming-paradigms
-Exercises and examples developed during Unicamp's Programming Paradigms course, MC346.
+Exercises and examples developed while taking Programming Paradigms (MC346) at Unicamp.
 
-It's main aim was the familiarization with the [functional](https://en.wikipedia.org/wiki/Functional_programming) and [logic](https://en.wikipedia.org/wiki/Logic_programming) paradigms using Haskell and Prolog, respectively. Some neat Python 3 features where also mentioned towards it's end (e.g. iterators, decorators, numpy, etc).
+It's main focus was the familiarization with the [functional](https://en.wikipedia.org/wiki/Functional_programming) and [logic](https://en.wikipedia.org/wiki/Logic_programming) paradigms, by using Haskell and Prolog. Some neat Python 3 features were also mentioned towards the end of the semester (e.g. iterators, decorators, numpy, etc).
 
-See below a summary of the interesting features/topics aborded, linked to their reference files, and the description of the Haskell and Prolog developed projects.
+See below a summary of the interesting features/topics covered, linked to their reference files, and the description of the Haskell and Prolog final projects.
 
 ## Haskell
 ### Topics
@@ -15,7 +15,7 @@ See below a summary of the interesting features/topics aborded, linked to their 
 - Binary search tree: [#5](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-05.hs)
 - [Currying](https://en.wikipedia.org/wiki/Currying) and higher order functions: [#6](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-06.hs)
 - Piping (`$`), function composition (`.`) and matrices: [#7](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-07.hs)
-- Find the most common vowel in a string: [#8](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-08.hs)
+- Finding the most common vowel in a string: [#8](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-08.hs)
 - Types, `Maybe` and monads: [#9](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-09.hs)
 - Weighted mean calculation from IO input: [#10](https://github.com/laurelkeys/programming-paradigms/blob/master/aula-10.hs)
 ### [Project](https://github.com/laurelkeys/programming-paradigms/blob/master/projeto-01.hs)
@@ -79,7 +79,7 @@ fffffffffffffffwwwwwwgggggggggggxx
 yyaaaaaaaaaaa
 ```
 #### Usage
-Save the input to a file, for example `test-entry.in` and run:
+Save the input to a file, for example `test-entry.in`, and run:
 ```
 >>> swipl -q -g main projeto-02.pl < test-entry.in
 ```
